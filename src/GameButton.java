@@ -17,14 +17,25 @@ public class GameButton extends JButton {
         this.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                instance.playAt(x,y);
-                updatePic(TextureManager.CIRCLE);
+                if(GameMain.touchable)
+                    instance.playAt(x,y);
             }
         });
         this.setOpaque(false);
         this.setContentAreaFilled(false);
         this.setBorderPainted(false);
         this.setFocusPainted(false);
+    }
+    public void changeIcon(int player){
+        if(player == 1){
+            this.setIcon(rescale(TextureManager.CIRCLE));
+        }else{
+            this.setIcon(rescale(TextureManager.CROSS));
+        }
+    }
+
+    public void reset(){
+        this.setIcon(rescale(TextureManager.BLANK));
     }
 
     private ImageIcon rescale(ImageIcon icon){
